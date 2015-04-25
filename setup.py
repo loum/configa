@@ -7,7 +7,7 @@ import fnmatch
 import shutil
 from setuptools import setup
 
-VERSION = '0.0.8'
+VERSION = '0.0.0'
 
 
 def opj(*args):
@@ -70,7 +70,6 @@ setup(name='python-configa',
       author='Lou Markovski',
       author_email='lou.markovski@gmail.com',
       url='',
-      install_requires=['python-logga==0.0.0']
       packages=['configa'],
       package_dir={'configa': 'configa'},
       data_files=FILES)
