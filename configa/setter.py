@@ -79,7 +79,13 @@ def setter(f, attr_type):
                 getattr(self, '_%s' % method_name)
                 setattr(self, '_%s' % method_name, value)
             except AttributeError:
-                raise
+                try:
+                    getattr(self, '_%s__%s' % (class_name(), method_name))
+                    setattr(self,
+                            '_%s__%s' % (class_name(), method_name),
+                            value)
+                except AttributeError:
+                    raise
 
             if isinstance(value, (int, long, float, complex)):
                 log.debug('%s.%s set to %s' %
