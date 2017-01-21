@@ -1,4 +1,7 @@
-import unittest2
+"""Unit tests for :class:`Configa`.
+
+"""
+import unittest
 import os
 
 import configa
@@ -104,7 +107,7 @@ class DummyConfig(configa.Config):
         pass
 
 
-class TestConfig(unittest2.TestCase):
+class TestConfig(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):

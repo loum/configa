@@ -1,19 +1,18 @@
-# pylint: disable=R0903,C0111,R0902
 """The :mod:`configa.setter` is an alertnate attribute setter
 mechanism that can be used on old-style Python classes.
 
 """
+import inspect
+import time
+import datetime
+from logga import log
+
 __all__ = [
     "set_scalar",
     "set_date",
     "set_list",
     "set_dict",
 ]
-import inspect
-import time
-import datetime
-
-from logga.log import log
 
 
 def setter(f, attr_type):
@@ -56,11 +55,12 @@ def setter(f, attr_type):
 
         type_check = False
         if ((not isinstance(value, (list, dict)) and
-            (attr_type == 'scalar' or attr_type == 'date')) or
-           (type(value) is datetime.datetime and attr_type == 'date') or
-           (isinstance(value, tuple) and attr_type == 'tuple') or
-           (isinstance(value, list) and attr_type == 'list') or
-           (isinstance(value, dict) and attr_type == 'dict')):
+             (attr_type == 'scalar' or attr_type == 'date')) or
+                ((isinstance(value, datetime.datetime) and
+                  attr_type == 'date')) or
+                (isinstance(value, tuple) and attr_type == 'tuple') or
+                (isinstance(value, list) and attr_type == 'list') or
+                (isinstance(value, dict) and attr_type == 'dict')):
             type_check = True
 
         if not type_check:
@@ -70,8 +70,8 @@ def setter(f, attr_type):
             method_name = method_name.replace('set_', '')
 
             # Special processing for dates.
-            if (attr_type == 'date' and value is not None):
-                if type(value) is not datetime.datetime:
+            if attr_type == 'date' and value is not None:
+                if not isinstance(value, datetime.datetime):
                     tmp_t = time.strptime(value, "%Y-%m-%d %H:%M:%S")
                     value = datetime.datetime.fromtimestamp(time.mktime(tmp_t))
 
@@ -87,36 +87,36 @@ def setter(f, attr_type):
                 except AttributeError:
                     raise
 
-            if isinstance(value, (int, long, float, complex)):
-                log.debug('%s.%s set to %s' %
-                          (class_name(), method_name, str(value)))
+            if isinstance(value, (int, float, complex)):
+                log.debug('%s.%s set to %s',
+                          class_name(), method_name, str(value))
             else:
-                log.debug('%s.%s set to "%s"' %
-                          (class_name(), method_name, value))
+                log.debug('%s.%s set to "%s"',
+                          class_name(), method_name, value)
 
-        return(f(self, *args))
+        return f(self, *args)
 
     return wrapped
 
 
-def set_scalar(f):
-    return(setter(f, attr_type='scalar'))
+def set_scalar(value):
+    return setter(value, attr_type='scalar')
 
 
-def set_date(f):
-    return(setter(f, attr_type='date'))
+def set_date(value):
+    return setter(value, attr_type='date')
 
 
-def set_tuple(f):
-    return(setter(f, attr_type='tuple'))
+def set_tuple(value):
+    return setter(value, attr_type='tuple')
 
 
-def set_list(f):
-    return(setter(f, attr_type='list'))
+def set_list(value):
+    return setter(value, attr_type='list')
 
 
-def set_dict(f):
-    return(setter(f, attr_type='dict'))
+def set_dict(value):
+    return setter(value, attr_type='dict')
 
 
 def class_name():

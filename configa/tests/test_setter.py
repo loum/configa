@@ -1,8 +1,7 @@
-# pylint: disable=R0904,W0142,C0103
 """:mod:`configa.setter` tests.
 
 """
-import unittest2
+import unittest
 import datetime
 
 from configa.setter import (set_scalar,
@@ -13,6 +12,9 @@ from configa.setter import (set_scalar,
 
 
 class Bogus(object):
+    """Bogus class definition for testing purposes.
+
+    """
     def __init__(self):
         self.__bogus_scalar = None
         self.__bogus_date = None
@@ -68,7 +70,7 @@ class Bogus(object):
         return self.__class__.__name__
 
 
-class TestSetter(unittest2.TestCase):
+class TestSetter(unittest.TestCase):
 
     def test_set_scalar(self):
         """Set a scalar value.
@@ -109,12 +111,12 @@ class TestSetter(unittest2.TestCase):
         bogus = Bogus()
 
         # when I provide a datetime object value via the setter
-        value = datetime.datetime(2004, 02, 12, 0, 0)
+        value = datetime.datetime(2004, 2, 12, 0, 0)
         bogus.set_bogus_date(value)
 
         # then the Bogus instance date attribute should be set
         received = bogus.bogus_date
-        expected = datetime.datetime(2004, 02, 12, 0, 0)
+        expected = datetime.datetime(2004, 2, 12, 0, 0)
         msg = 'Attribute bogus_scalar set error'
         self.assertEqual(received, expected, msg)
 
@@ -245,10 +247,10 @@ class TestSetter(unittest2.TestCase):
 
         # then the class instance should throw an exception
         err_msg = "'Bogus' object has no attribute '_Bogus__missing_attr'"
-        self.assertRaisesRegexp(AttributeError,
-                                err_msg,
-                                bogus.set_missing_attr,
-                                value)
+        self.assertRaisesRegex(AttributeError,
+                               err_msg,
+                               bogus.set_missing_attr,
+                               value)
 
     def test_set_scalar_non_scalar_value(self):
         """Set a scalar value: non scalar value.
@@ -260,10 +262,10 @@ class TestSetter(unittest2.TestCase):
         value = ['Bogus Value']
 
         # then the class instance should throw an exception
-        self.assertRaisesRegexp(TypeError,
-                                "\"\['Bogus Value'\]\" is not a scalar",
-                                bogus.set_bogus_scalar,
-                                value)
+        self.assertRaisesRegex(TypeError,
+                               '"\[\'Bogus Value\']" is not a scalar',
+                               bogus.set_bogus_scalar,
+                               value)
 
         # and check the class instance attribute should remain unchanged.
         received = bogus.bogus_scalar
