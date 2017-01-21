@@ -16,9 +16,7 @@ Now, set ``python3`` to your Python 3 executable::
 
     $ sudo alternatives /usr/bin/python3 python3 /urs/bin/python3.5 20000
 
-.. note::
-
-    ``python3`` must exist in order for the project ``Makefile`` to function correctly.
+Note: ``python3`` must exist in order for the project ``Makefile`` to function correctly.
 
 ***************
 Getting Started
@@ -49,9 +47,7 @@ The project comes with a simple web server that allows you to present the docs f
     $ cd docs/build
     $ ./http_server.py
     
-.. note::
-
-    The web server will block your CLI and all activity will be logged to the console.  To end serving pages, just ``Ctrl-C``.
+Note: The web server will block your CLI and all activity will be logged to the console.  To end serving pages, just ``Ctrl-C``.
     
 To view pages, open up a web browser and navigate to ``http:<your_server_IP>:8888``
 
