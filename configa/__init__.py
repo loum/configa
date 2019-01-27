@@ -10,7 +10,7 @@ from logga import log
 __all__ = ["Config"]
 
 
-class Config(configparser.SafeConfigParser):
+class Config(configparser.ConfigParser):
     """:class:`configa.Config` class.
 
     .. attribute:: *config_file*
@@ -20,7 +20,7 @@ class Config(configparser.SafeConfigParser):
     .. note::
 
         The :class:`Config` class inherits from the old-style
-        :class:`configparser.SafeConfigParser` and does not support
+        :class:`configparser.ConfigParser` and does not support
         property getters and setters.
 
     """
@@ -28,7 +28,7 @@ class Config(configparser.SafeConfigParser):
         """:class:`configa.Config` initialisation.
 
         """
-        configparser.SafeConfigParser.__init__(self)
+        configparser.ConfigParser.__init__(self)
 
         self.__config_file = config_file
 

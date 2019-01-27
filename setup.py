@@ -4,13 +4,13 @@ import setuptools
 
 
 PACKAGES = [
-    'logga==1.0.0',
-    'pylint==1.6.4',
-    'pytest==2.9.2',
-    'pytest-cov==2.3.0',
-    'sphinx_rtd_theme==0.1.10a0',
+    'logga>=1.0.0',
+    'pylint>=1.6.4',
+    'pytest>=2.9.2',
+    'pytest-cov>=2.3.0',
+    'sphinx_rtd_theme>=0.1.10a0',
     'twine',
-    'Sphinx==1.4.5',
+    'Sphinx>=1.4.5',
 ]
 
 SETUP_KWARGS = {
