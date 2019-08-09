@@ -22,12 +22,14 @@ def setter(f, attr_type):
     correctly:
 
     * The setter decorator name should be the concatenation of ``set_``
-    and the attribute name.  For example, if the attribute name is
-    ``_my_attr`` then the setter decorator name should be ``set_my_attr``
+      and the attribute name.  For example, if the attribute name is
+      ``_my_attr`` then the setter decorator name should be ``set_my_attr``
 
-    .. note:: the assumption here is that you will be setting a *private*
-    attribute member.  To adhere to good style guide principles, this
-    *private* member should be preceded by a leading underscore ``_``
+    .. note::
+
+        the assumption here is that you will be setting a *private*
+        attribute member.  To adhere to good style guide principles, this
+        *private* member should be preceded by a leading underscore ``_``
 
     For example, apply the ``set_scalar`` decorator in the place where you
     define your property setter::

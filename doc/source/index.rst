@@ -1,21 +1,20 @@
-.. Logga documentation master file
+.. Configa documentation master file
 
-Logga
-=====
+#######
+Configa
+#######
 
-Contents:
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contents:
 
-   Python Logging Helper <modules/log.rst>
+    Python Configuration Helper <modules/configa.rst>
 
-
-
+##################
 Indices and tables
-==================
+##################
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

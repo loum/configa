@@ -23,7 +23,7 @@ __all__ = ["Config"]
 class Config(configparser.ConfigParser):
     """:class:`configa.Config` class.
 
-    .. attribute:: *config_filepath*
+    .. attribute:: config_filepath
 
         path to the configuration file to parse
 

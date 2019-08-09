@@ -7,10 +7,11 @@
 Configa
 #######
 
-*********
-Functions
-*********
-.. currentmodule:: configa
+.. autoclass:: configa.Config
+   :members:
+
+.. automodule:: configa.setter
+   :members: setter
 
 ******************
 Indices and tables
