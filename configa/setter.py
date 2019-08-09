@@ -5,7 +5,7 @@ mechanism that can be used on old-style Python classes.
 import inspect
 import time
 import datetime
-from logga import log
+import logging as log
 
 __all__ = [
     "set_scalar",

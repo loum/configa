@@ -5,7 +5,17 @@ import sys
 import builtins
 import os
 import configparser
-from logga import log
+import logging as log
+
+ROOT = log.getLogger()
+ROOT.setLevel(log.INFO)
+
+if not ROOT.hasHandlers():
+    HANDLER = log.StreamHandler(sys.stdout)
+    HANDLER.setLevel(log.INFO)
+    FORMATTER = log.Formatter('%(asctime)s:%(name)s:%(levelname)s: %(message)s')
+    HANDLER.setFormatter(FORMATTER)
+    ROOT.addHandler(HANDLER)
 
 __all__ = ["Config"]
 
@@ -13,7 +23,7 @@ __all__ = ["Config"]
 class Config(configparser.ConfigParser):
     """:class:`configa.Config` class.
 
-    .. attribute:: *config_file*
+    .. attribute:: *config_filepath*
 
         path to the configuration file to parse
 
@@ -30,17 +40,23 @@ class Config(configparser.ConfigParser):
         """
         configparser.ConfigParser.__init__(self)
 
-        self.__config_file = config_file
+        self.__config_filepath = config_file
 
         if config_file is not None:
             self.parse_config()
 
     @property
-    def config_file(self):
-        return self.__config_file
+    def config_filepath(self):
+        """:attr:`config_filepath` getter
+        """
+        return self.__config_filepath
 
-    def set_config_file(self, value):
-        self.__config_file = value
+    @config_filepath.setter
+    def config_filepath(self, value):
+        """:attr:`config_filepath` setter
+        """
+        log.info('### %s', value)
+        self.__config_filepath = value
 
     @property
     def facility(self):
@@ -56,14 +72,14 @@ class Config(configparser.ConfigParser):
             Boolean ``True`` upon success.  Boolean ``False`` otherwise.
 
         """
-        log.debug('Parsing config file: "%s"', self.config_file)
+        log.debug('Parsing config file: "%s"', self.config_filepath)
         config_parse_status = False
 
-        if (self.config_file is None or
-                not os.path.exists(self.config_file)):
-            log.error('Invalid config file: "%s"', self.config_file)
+        if (self.config_filepath is None or
+                not os.path.exists(self.config_filepath)):
+            log.error('Invalid config file: "%s"', self.config_filepath)
         else:
-            self.read(self.config_file)
+            self.read(self.config_filepath)
             config_parse_status = True
 
         return config_parse_status

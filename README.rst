@@ -6,15 +6,7 @@ Convert configuration items into Python objects.
 *************
 Prerequisites
 *************
-Targeting Python 3 here on a Linux platform, namely CentOS 7.
-
-On a vanilla CentOS 7, you will need to install Python 3 manually.  `IUS <https://ius.io/GettingStarted/>`_ can help you with this.  Then::
-
-    $ sudo yum install -y python35u
-
-Now, set ``python3`` to your Python 3 executable::
-
-    $ sudo alternatives /usr/bin/python3 python3 /urs/bin/python3.5 20000
+Targeting Python 3 here on a Linux platform.
 
 Note: ``python3`` must exist in order for the project ``Makefile`` to function correctly.
 
@@ -28,11 +20,11 @@ Get the code::
 Build the virtual environment and download project dependencies::
 
     $ cd configa
-    $ make init_wheel
+    $ make init APP_ENV=dev
     
 Run the tests to make sure all is OK::
 
-    $ source venv/bin/activate
+    $ source 3env/bin/activate
     (venv) $ make tests
 
 ***********************
@@ -50,13 +42,3 @@ The project comes with a simple web server that allows you to present the docs f
 Note: The web server will block your CLI and all activity will be logged to the console.  To end serving pages, just ``Ctrl-C``.
     
 To view pages, open up a web browser and navigate to ``http:<your_server_IP>:8888``
-
-****
-FAQs
-****
-**Why can't access the docs from my browser?**
-
-Firewall?  Try::
-
-    $ sudo firewall-cmd --zone=public --add-port=8888/tcp --permanent
-    $ sudo firewall-cmd reload
